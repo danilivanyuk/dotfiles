@@ -5,7 +5,6 @@ live_config_reload = true
 import = [ "~/.config/alacritty/themes/tokyo.toml" ]
 
 [window]
-decorations = "None"
 padding = { x = 0, y = 0 }
 dynamic_padding = true
 
