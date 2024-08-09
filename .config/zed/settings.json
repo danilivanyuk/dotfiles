@@ -17,6 +17,12 @@
   },
   "languages": {
     "TSX": {
+      "inlay_hints": {
+        "enabled": true,
+        "show_parameter_hints": false,
+        "show_other_hints": true,
+        "show_type_hints": true
+      },
       "format_on_save": {
         "external": {
           "command": "prettier",
