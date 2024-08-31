@@ -2,7 +2,7 @@
 live_config_reload = true
 
 # Current desktop theme
-import = [ "~/.config/alacritty/themes/tokyo.toml" ]
+import = [ "~/.config/alacritty/themes/rose-pine.toml" ]
 
 [window]
 padding = { x = 0, y = 0 }

@@ -222,7 +222,8 @@ require('lazy').setup({
     -- change the command in the config to whatever the name of that colorscheme is.
     --
     -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-    'folke/tokyonight.nvim',
+    -- 'folke/tokyonight.nvim',
+    'rose-pine/neovim',
     -- 'scottmckendry/cyberdream.nvim',
     -- lazy = false,
     priority = 1000, -- Make sure to load this before all the other start plugins.
@@ -230,9 +231,10 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+      -- vim.cmd.colorscheme 'tokyonight-night'
       -- vim.cmd.colorscheme 'cyberdream'
       -- You can configure highlights by doing something like:
+      vim.cmd [[colorscheme rose-pine]]
       vim.cmd [[
         highlight Normal guibg=none
         highlight NonText guibg=none
@@ -416,6 +418,24 @@ require('lazy').setup({
     -- order to load the plugin when the command is run for the first time
     keys = {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    },
+    {
+      'ggandor/leap.nvim',
+      enabled = true,
+      keys = {
+        { 's', mode = { 'n', 'x', 'o' }, desc = 'Leap Forward to' },
+        { 'S', mode = { 'n', 'x', 'o' }, desc = 'Leap Backward to' },
+        { 'gs', mode = { 'n', 'x', 'o' }, desc = 'Leap from Windows' },
+      },
+      config = function(_, opts)
+        local leap = require 'leap'
+        for k, v in pairs(opts) do
+          leap.opts[k] = v
+        end
+        leap.add_default_mappings(true)
+        vim.keymap.del({ 'x', 'o' }, 'x')
+        vim.keymap.del({ 'x', 'o' }, 'X')
+      end,
     },
   },
 }, {
