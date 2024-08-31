@@ -12,5 +12,4 @@ ln -s $HOME/dotfiles/config/zed ~/.config
 ln -s $HOME/dotfiles/.tmux.conf ~/
 ln -s $HOME/dotfiles/.zshrc ~/
 ln -s $HOME/dotfiles/.zshrc.pre-oh-my-zsh ~/
-ln -s $HOME/dotfiles/oh-my-zsh ~/
 ln -s $HOME/dotfiles/zsh/ ~/
