@@ -7,7 +7,7 @@
       "g [": "editor::GoToPrevDiagnostic",
       "g r": "editor::FindAllReferences",
       "shift-k": "editor::Hover",
-      "space l a": "editor::ToggleCodeActions",
+      "space c a": "editor::ToggleCodeActions",
       "space r n": "editor::Rename",
       "space l f": "editor::Format",
       "space l l": "diagnostics::Deploy",
@@ -24,8 +24,7 @@
   },
   {
     "context": "Editor && vim_mode == insert && !menu",
-    "bindings": {
-    }
+    "bindings": {}
   },
   {
     "context": "Editor && vim_mode == visual && !VimWaiting && !VimObject",
@@ -83,6 +82,13 @@
       "alt-ctrl-]": "editor::UnfoldLines",
       "ctrl-space": "editor::ShowCompletions",
       "ctrl-.": "editor::ToggleCodeActions"
+    }
+  },
+  {
+    "context": "ProjectSearchBar",
+    "bindings": {
+      "ctrl-n": "search::SelectNextMatch",
+      "ctrl-p": "search::SelectPrevMatch"
     }
   }
 ]

@@ -2,7 +2,7 @@
 live_config_reload = true
 
 # Current desktop theme
-import = [ "~/.config/alacritty/themes/rose-pine.toml" ]
+import = [ "~/.config/alacritty/themes/kanagawa.toml" ]
 
 [window]
 padding = { x = 0, y = 0 }
@@ -15,3 +15,4 @@ args = ["-l","-c", "tmux attach || tmux"]
 
 [font]
 normal = {family = "FiraCode Nerd Font", style = "Regular"}
+size = 14

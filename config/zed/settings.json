@@ -7,13 +7,23 @@
     "light": "One Light",
     "dark": "Catppuccin Mocha"
   },
-  "format_on_save": "off",
+  "format_on_save": "on",
   "indent_guides": {
     "enabled": true,
     "coloring": "indent_aware"
   },
   "inlay_hints": {
     "enabled": true
+  },
+  "task": {
+    "label": "search:project",
+    "command": "QUERY=${ZED_SELECTED_TEXT:-}; FILE=$(rg --column --hidden --line-number --no-heading --color=always --smart-case --colors match:fg:green --colors path:fg:white --colors path:style:nobold --glob '!**/.git/' '--glob' '!**/node_modules'  \"$QUERY\" . | fzf --ansi --delimiter : --preview 'bat --style=numbers,changes,header --color=always --highlight-line {2} {1}' --preview-window 'up:60%:+{2}+3/3' --layout=reverse --query \"$QUERY\" --print-query | tail -1); if [ -n \"$FILE\" ]; then LINE=$(echo $FILE | cut -d':' -f2); COL=$(echo $FILE | cut -d':' -f3); FILE=$(echo $FILE | cut -d':' -f1); zed $FILE:$LINE:$COL; fi",
+    "env": {},
+    "cwd": "${ZED_WORKTREE_ROOT}",
+    "allow_concurrent_runs": false,
+    "use_new_terminal": false,
+    "reveal": "always",
+    "hide": "on_success"
   },
   "languages": {
     "TSX": {
@@ -53,9 +63,15 @@
       }
     },
     "Python": {
-      "format_on_save": { "language_server": { "name": "ruff" } },
-      "formatter": { "language_server": { "name": "ruff" } },
-      "language_servers": ["pyright", "ruff"]
+      "language_servers": ["ruff", "pyright"],
+      "format_on_save": "on",
+      "formatter": [
+        {
+          "language_server": {
+            "name": "ruff"
+          }
+        }
+      ]
     },
     "JavaScript": {
       "format_on_save": {
@@ -67,6 +83,18 @@
       "code_actions_on_format": {
         "source.fixAll.eslint": true
       }
+    }
+  },
+  "lsp": {
+    "pyright": {
+      "settings": {
+        "python": {
+          "pythonPath": "~/Work/alpacaMeet/venv"
+        }
+      }
+    },
+    "ruff": {
+      "initialization_options": {}
     }
   },
   "file_types": {

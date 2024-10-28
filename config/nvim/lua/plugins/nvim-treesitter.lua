@@ -1,10 +1,15 @@
-vim.defer_fn(function()
-    require('nvim-treesitter.configs').setup {
-      -- Add languages to be installed here that you want installed for treesitter
-      -- ensure_installed = { 'tsx', 'javascript', 'typescript' },
-
-      -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-      auto_install = false,
+-- Code Tree Support / Syntax Highlighting
+return {
+  -- https://github.com/nvim-treesitter/nvim-treesitter
+  'nvim-treesitter/nvim-treesitter',
+  event = 'VeryLazy',
+  dependencies = {
+    -- https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
+  build = ':TSUpdate',
+  opts = {
+      auto_install = true,
 
       highlight = { enable = true },
       indent = { enable = true },
@@ -61,5 +66,10 @@ vim.defer_fn(function()
           },
         },
       },
-    }
-  end, 0)
+  },
+  config = function (_, opts)
+    local configs = require("nvim-treesitter.configs")
+    configs.setup(opts)
+  end
+}
+
