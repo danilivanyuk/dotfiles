@@ -5,7 +5,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "Catppuccin Mocha"
+    "dark": "Kanagawa Dragon"
   },
   "format_on_save": "on",
   "indent_guides": {
@@ -134,6 +134,15 @@
     "W": "w",
     "Wq": "wq",
     "Q": "q"
+  },
+  "terminal": {
+    "working_directory": "current_project_directory",
+    "shell": {
+      "with_arguments": {
+        "program": "tmux",
+        "args": ["-l", "-c", "tmux attach || tmux"]
+      }
+    }
   },
   "git": {
     "enabled": true,

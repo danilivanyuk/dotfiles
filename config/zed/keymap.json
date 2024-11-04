@@ -8,6 +8,7 @@
       "g r": "editor::FindAllReferences",
       "shift-k": "editor::Hover",
       "space c a": "editor::ToggleCodeActions",
+      "space s e": "activity_indicator::ShowErrorMessage",
       "space r n": "editor::Rename",
       "space l f": "editor::Format",
       "space l l": "diagnostics::Deploy",
@@ -18,8 +19,11 @@
       "space p": "outline::Toggle",
       "space v": "editor::GoToDefinitionSplit",
       "space t": "workspace::ToggleRightDock",
-      "ctrl-h": "pane::ActivateNextItem",
-      "ctrl-l": "pane::ActivatePrevItem"
+      "shift-l": "pane::ActivateNextItem",
+      "shift-h": "pane::ActivatePrevItem",
+      "ctrl-x": "pane::CloseActiveItem",
+      "ctrl-shift-x": "pane::CloseAllItems",
+      "ctrl-shift-t": "pane::ReopenClosedItem"
     }
   },
   {
@@ -88,7 +92,8 @@
     "context": "ProjectSearchBar",
     "bindings": {
       "ctrl-n": "search::SelectNextMatch",
-      "ctrl-p": "search::SelectPrevMatch"
+      "ctrl-p": "search::SelectPrevMatch",
+      "ctrl-x": "tab_switcher::CloseSelectedItem"
     }
   }
 ]
