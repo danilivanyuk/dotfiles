@@ -12,12 +12,15 @@ return {
 				quit_on_open = true,
 			},
 		},
+		update_focused_file = {
+			enable = true,
+		},
 		sort = {
 			sorter = "case_sensitive",
 		},
 		view = {
 			side = "right",
-			width = 30,
+			width = 60,
 			relativenumber = true,
 		},
 		renderer = {
@@ -59,6 +62,7 @@ return {
 		-- Recommended settings to disable default netrw file explorer
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
+		vim.g.nvim_tree_respect_buf_cwd = 1
 		require("nvim-tree").setup(opts)
 	end,
 }

@@ -31,7 +31,8 @@ return {
 				-- 'jsonls', -- requires npm to be installed
 				"lemminx",
 				"marksman",
-				"tsserver", -- requires npm to be installed
+				-- "tsserver", -- requires npm to be installed
+				"ts_ls", -- requires npm to be installed
 				-- 'yamlls', -- requires npm to be installed
 			},
 		})
@@ -43,12 +44,13 @@ return {
 			--
 		end
 
-		require("lspconfig").tsserver.setup({
-			filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-			root_dir = function()
-				return vim.loop.cwd()
-			end, -- run lsp for javascript in any directory
-		})
+		-- use ts_ls instead
+		-- require("lspconfig").tsserver.setup({
+		-- 	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+		-- 	root_dir = function()
+		-- 		return vim.loop.cwd()
+		-- 	end, -- run lsp for javascript in any directory
+		-- })
 		-- Call setup on each LSP server
 		require("mason-lspconfig").setup_handlers({
 			function(server_name)

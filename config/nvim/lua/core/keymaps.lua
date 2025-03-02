@@ -25,8 +25,8 @@ keymap.set("n", "<leader>sh", "<C-w><5", { desc = "make split windows width smal
 -- Tab management
 keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "[T]ab [O]pen" })
 keymap.set("n", "<leader>tx", ":tabclose<CR>", { desc = "close a tab" })
--- keymap.set("n", "<tab>", ":tabn<CR>", { desc = "next tab" })
-keymap.set("n", "<leader>tp", ":tabp<CR>", { desc = "previous tab" })
+keymap.set("n", "<C-Right>", ":tabn<CR>", { desc = "next tab" })
+keymap.set("n", "<C-Left>", ":tabp<CR>", { desc = "previous tab" })
 
 -- Diff keymaps
 keymap.set("n", "<leader>cc", ":diffput<CR>", { desc = "put diff from current to other during diff" })
