@@ -10,6 +10,7 @@ return {
 	build = ":TSUpdate",
 	opts = {
 		auto_install = true,
+		ensure_installed = { "python" },
 
 		highlight = { enable = true },
 		indent = { enable = true },

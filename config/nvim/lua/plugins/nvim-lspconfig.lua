@@ -4,21 +4,27 @@ return {
 	-- https://github.com/neovim/nvim-lspconfig
 	"neovim/nvim-lspconfig",
 	event = "VeryLazy",
+	lazy = false,
 	dependencies = {
 		-- LSP Management
 		-- https://github.com/williamboman/mason.nvim
 		{ "williamboman/mason.nvim" },
 		-- https://github.com/williamboman/mason-lspconfig.nvim
 		{ "williamboman/mason-lspconfig.nvim" },
-
 		-- Useful status updates for LSP
 		-- https://github.com/j-hui/fidget.nvim
 		{ "j-hui/fidget.nvim", opts = {} },
-
 		-- Additional lua configuration, makes nvim stuff amazing!
 		-- https://github.com/folke/neodev.nvim
 		{ "folke/neodev.nvim", opts = {} },
+		-- main one completion
 	},
+	-- init = function()
+	-- 	vim.g.coq_settings = {
+	-- 		auto_start = true, -- if you want to start COQ at startup
+	-- 		-- Your COQ settings here
+	-- 	}
+	-- end,
 	config = function()
 		require("mason").setup()
 		require("mason-lspconfig").setup({
@@ -34,6 +40,7 @@ return {
 				-- "tsserver", -- requires npm to be installed
 				"ts_ls", -- requires npm to be installed
 				-- 'yamlls', -- requires npm to be installed
+				"basedpyright",
 			},
 		})
 
@@ -44,25 +51,23 @@ return {
 			--
 		end
 
-		-- use ts_ls instead
-		-- require("lspconfig").tsserver.setup({
-		-- 	filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-		-- 	root_dir = function()
-		-- 		return vim.loop.cwd()
-		-- 	end, -- run lsp for javascript in any directory
-		-- })
-		-- Call setup on each LSP server
+		-- Call setup on each LSP server EXCEPT basedpyright (we'll handle it separately)
 		require("mason-lspconfig").setup_handlers({
 			function(server_name)
-				lspconfig[server_name].setup({
-					on_attach = lsp_attach,
-					capabilities = lsp_capabilities,
-				})
+				-- Skip basedpyright here since we configure it separately
+				if server_name ~= "basedpyright" then
+					lspconfig[server_name].setup({
+						on_attach = lsp_attach,
+						capabilities = lsp_capabilities,
+					})
+				end
 			end,
 		})
 
 		-- Lua LSP settings
 		lspconfig.lua_ls.setup({
+			on_attach = lsp_attach,
+			capabilities = lsp_capabilities,
 			settings = {
 				Lua = {
 					diagnostics = {
@@ -71,6 +76,64 @@ return {
 					},
 				},
 			},
+		})
+
+		-- BasedPyright LSP settings (configured separately to avoid override)
+		lspconfig.basedpyright.setup({
+			on_attach = lsp_attach,
+			capabilities = lsp_capabilities,
+			-- Try multiple approaches to ensure settings are applied
+			-- Это все равно не работает
+			settings = {
+				python = {
+					analysis = {
+						diagnosticMode = "openFilesOnly",
+						typeCheckingMode = "basic",
+						useLibraryCodeForTypes = true,
+						autoSearchPaths = true,
+						diagnosticSeverityOverrides = {
+							reportGeneralTypeIssues = "none",
+							reportOptionalMemberAccess = "none",
+							reportOptionalSubscript = "none",
+							reportPrivateImportUsage = "none",
+							reportUnusedCallResult = "none",
+							reportUnusedExpression = "none", -- Alternative name
+							reportArgumentType = "none",
+							reportUnknownMemberType = "none",
+							reportAssignmentType = "none",
+						},
+					},
+				},
+			},
+			-- Alternative: use init_options
+			init_options = {
+				settings = {
+					python = {
+						analysis = {
+							diagnosticSeverityOverrides = {
+								reportUnusedCallResult = "none",
+								reportGeneralTypeIssues = "none",
+								reportArgumentType = "none",
+								reportUnknownMemberType = "none",
+								reportAssignmentType = "none",
+							},
+						},
+					},
+				},
+			},
+			-- Force settings on attach with delay
+			on_attach = function(client, bufnr)
+				lsp_attach(client, bufnr)
+
+				-- Force configuration update after a short delay
+				vim.defer_fn(function()
+					if client.server_capabilities then
+						client.notify("workspace/didChangeConfiguration", {
+							settings = client.config.settings,
+						})
+					end
+				end, 1000)
+			end,
 		})
 
 		-- Globally configure all LSP floating preview popups (like hover, signature help, etc)

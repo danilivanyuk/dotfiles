@@ -1,22 +1,33 @@
 {
-  "features": {
-    "edit_prediction_provider": "zed"
+  "git_panel": {
+    "tree_view": true,
   },
+  "agent": {
+    "dock": "left",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "edit_predictions": {
+    "provider": "none",
+  },
+  "icon_theme": "Material Icon Theme",
+  "ui_font_family": "JetBrains Mono",
+  "buffer_font_family": "JetBrains Mono",
   "ui_font_size": 16,
   "buffer_font_size": 16,
-  "soft_wrap": "preferred_line_length",
+  "soft_wrap": "editor_width",
   "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Kanagawa Dragon"
+    "mode": "dark",
+    "light": "Gruvbox Light Hard",
+    "dark": "Gruvbox Dark Soft",
   },
   "format_on_save": "on",
   "indent_guides": {
     "enabled": true,
-    "coloring": "indent_aware"
+    "coloring": "indent_aware",
   },
   "inlay_hints": {
-    "enabled": true
+    "enabled": true,
   },
   "task": {
     "label": "search:project",
@@ -26,126 +37,156 @@
     "allow_concurrent_runs": false,
     "use_new_terminal": false,
     "reveal": "always",
-    "hide": "on_success"
+    "hide": "on_success",
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "type": "registry",
+    },
+    "gemini": {
+      "type": "registry",
+    },
   },
   "languages": {
     "TSX": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
       "inlay_hints": {
         "enabled": true,
         "show_parameter_hints": false,
         "show_other_hints": true,
-        "show_type_hints": true
+        "show_type_hints": true,
       },
-      "format_on_save": {
-        "external": {
-          "command": "prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
-        }
-      },
+      "format_on_save": "on",
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
-        "source.organizeImports": true
-      }
+        "source.organizeImports": true,
+      },
     },
     "TypeScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
       "inlay_hints": {
         "enabled": true,
         "show_parameter_hints": false,
         "show_other_hints": true,
-        "show_type_hints": true
+        "show_type_hints": true,
       },
-      "format_on_save": {
-        "external": {
-          "command": "prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
-        }
-      },
+      "format_on_save": "on",
       "code_actions_on_format": {
         "source.fixAll.eslint": true,
-        "source.organizeImports": true
-      }
+        "source.organizeImports": true,
+      },
+    },
+    "JavaScript": {
+      "formatter": {
+        "external": {
+          "command": "prettier",
+          "arguments": ["--stdin-filepath", "{buffer_path}"],
+        },
+      },
+      "format_on_save": "on",
+      "code_actions_on_format": {
+        "source.fixAll.eslint": true,
+      },
     },
     "Python": {
-      "language_servers": ["ruff", "pyright"],
+      "language_servers": ["pylsp", "ruff", "pyright"],
       "format_on_save": "on",
       "formatter": [
         {
           "language_server": {
-            "name": "ruff"
-          }
-        }
-      ]
+            "name": "ruff",
+          },
+        },
+      ],
     },
-    "JavaScript": {
-      "format_on_save": {
-        "external": {
-          "command": "prettier",
-          "arguments": ["--stdin-filepath", "{buffer_path}"]
-        }
-      },
-      "code_actions_on_format": {
-        "source.fixAll.eslint": true
-      }
-    }
   },
   "lsp": {
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+        "javascript": {
+          "updateImportsOnFileMove": {
+            "enabled": "always",
+          },
+        },
+      },
+      "enable_lsp_tasks": true,
+    },
     "pyright": {
       "settings": {
+        "python.analysis": {
+          "diagnosticMode": "workspace",
+        },
         "python": {
-          "pythonPath": "~/Work/alpacaMeet/venv"
-        }
-      }
+          "pythonPath": "./.venv/bin/python",
+        },
+      },
     },
     "ruff": {
-      "initialization_options": {}
-    }
+      "initialization_options": {},
+    },
   },
   "file_types": {
     "Dockerfile": ["Dockerfile", "Dockerfile.*"],
-    "JSON": ["json", "jsonc", "*.code-snippets"]
+    "JSON": ["json", "jsonc", "*.code-snippets"],
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "project_panel": {
     "button": true,
     "dock": "right",
-    "git_status": true
+    "git_status": true,
   },
   "outline_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "notification_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "chat_panel": {
-    "dock": "left"
+    "dock": "left",
   },
   "vim_mode": true,
   "vim": {
     "use_system_clipboard": "always",
-    "use_multiline_find": true
+    "use_multiline_find": true,
   },
   "cursor_blink": false,
-  "relative_line_numbers": true,
+  "relative_line_numbers": "enabled",
   "vertical_scroll_margin": 0,
   "command_aliases": {
-    "W": "w",
+    "W": "w, ц",
     "Wq": "wq",
-    "Q": "q"
+    "Q": "q",
   },
   "terminal": {
+    "shell": "system",
     "working_directory": "current_project_directory",
-    "shell": {
-      "with_arguments": {
-        "program": "tmux",
-        "args": ["-l", "-c", "tmux attach || tmux"]
-      }
-    }
+    "detect_venv": {
+      "on": {
+        "directories": [".env", "env", ".venv", "venv", "../venv"],
+        "activate_script": "default",
+      },
+    },
   },
   "git": {
     "enabled": true,
@@ -158,6 +199,6 @@
     "autoFetchOnBuildEvents": ["build", "run", "debug"],
     "autoFetchOnBuildEventsDelay": 1500,
     "autoFetchOnBuildDelay": 1500,
-    "git_gutter": "tracked_files"
-  }
+    "git_gutter": "tracked_files",
+  },
 }

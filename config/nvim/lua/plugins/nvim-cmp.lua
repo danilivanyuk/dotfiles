@@ -23,6 +23,7 @@ return {
 		"hrsh7th/cmp-path",
 		-- https://github.com/hrsh7th/cmp-cmdline
 		"hrsh7th/cmp-cmdline",
+		"lukas-reineke/cmp-under-comparator",
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -60,6 +61,19 @@ return {
 				-- Add borders to completions popups
 				completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
+			},
+			sorting = {
+				priority_weight = 1,
+				comparators = {
+					cmp.config.compare.offset,
+					cmp.config.compare.exact,
+					cmp.config.compare.score,
+					require("cmp-under-comparator").under,
+					cmp.config.compare.kind,
+					cmp.config.compare.sort_text,
+					cmp.config.compare.length,
+					cmp.config.compare.order,
+				},
 			},
 		})
 	end,

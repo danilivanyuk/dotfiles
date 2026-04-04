@@ -2,6 +2,7 @@
 return {
 	-- https://github.com/nvim-tree/nvim-tree.lua
 	"nvim-tree/nvim-tree.lua",
+	lazy = false,
 	dependencies = {
 		-- https://github.com/nvim-tree/nvim-web-devicons
 		"nvim-tree/nvim-web-devicons", -- Fancy icon support
@@ -64,5 +65,22 @@ return {
 		vim.g.loaded_netrwPlugin = 1
 		vim.g.nvim_tree_respect_buf_cwd = 1
 		require("nvim-tree").setup(opts)
+
+		vim.api.nvim_create_autocmd("VimEnter", {
+			callback = function(data)
+				local no_args = vim.fn.argc() == 0
+				local directory = vim.fn.isdirectory(data.file) == 1
+
+				if directory then
+					vim.cmd.cd(data.file)
+					require("nvim-tree.api").tree.open()
+					return
+				end
+
+				if no_args then
+					require("nvim-tree.api").tree.open()
+				end
+			end,
+		})
 	end,
 }

@@ -4,11 +4,11 @@
     "bindings": {
       "ctrl-w t": "terminal_panel::ToggleFocus",
       "g ]": "editor::GoToDiagnostic",
-      "g [": "editor::GoToPrevDiagnostic",
+      "g [": "editor::GoToPreviousDiagnostic",
       "g r": "editor::FindAllReferences",
       "shift-k": "editor::Hover",
       "space c a": "editor::ToggleCodeActions",
-      "space s e": "activity_indicator::ShowErrorMessage",
+      "space g l": "activity_indicator::ShowErrorMessage",
       "space r n": "editor::Rename",
       "space l f": "editor::Format",
       "space l l": "diagnostics::Deploy",
@@ -18,12 +18,13 @@
       "space o": "tab_switcher::Toggle",
       "space p": "outline::Toggle",
       "space v": "editor::GoToDefinitionSplit",
-      "space t": "workspace::ToggleRightDock",
+      "space e e": "workspace::ToggleRightDock",
       "shift-l": "pane::ActivateNextItem",
-      "shift-h": "pane::ActivatePrevItem",
+      "shift-h": "pane::ActivatePreviousItem",
       "ctrl-x": "pane::CloseActiveItem",
       "ctrl-shift-x": "pane::CloseAllItems",
-      "ctrl-shift-t": "pane::ReopenClosedItem"
+      "ctrl-shift-t": "pane::ReopenClosedItem",
+      "space l g": "git_panel::ToggleFocus"
     }
   },
   {
@@ -49,15 +50,13 @@
     "bindings": {
       "ctrl-[": "editor::Outdent",
       "ctrl-]": "editor::Indent",
-      "ctrl-alt-up": "editor::AddSelectionAbove",
-      "ctrl-alt-down": "editor::AddSelectionBelow",
       "ctrl-d": [
         "editor::SelectNext",
         {
           "replace_newest": false
         }
       ],
-      "ctrl-ctrl-d": [
+      "ctrl-shift-d": [
         "editor::SelectPrevious",
         {
           "replace_newest": false
@@ -73,14 +72,6 @@
       "alt-down": "editor::SelectSmallerSyntaxNode",
       "ctrl-u": "editor::UndoSelection",
       "ctrl-shift-u": "editor::RedoSelection",
-      "f8": "editor::GoToDiagnostic",
-      "shift-f8": "editor::GoToPrevDiagnostic",
-      "f2": "editor::Rename",
-      "f12": "editor::GoToDefinition",
-      "alt-f12": "editor::GoToDefinitionSplit",
-      "ctrl-f12": "editor::GoToTypeDefinition",
-      "alt-ctrl-f12": "editor::GoToTypeDefinitionSplit",
-      "alt-shift-f12": "editor::FindAllReferences",
       "ctrl-m": "editor::MoveToEnclosingBracket",
       "alt-ctrl-[": "editor::Fold",
       "alt-ctrl-]": "editor::UnfoldLines",
@@ -89,11 +80,56 @@
     }
   },
   {
+    "context": "ProjectPanel",
+    "bindings": {
+      "space e e": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "q": "git_panel::Close"
+    }
+  },
+  {
     "context": "ProjectSearchBar",
     "bindings": {
       "ctrl-n": "search::SelectNextMatch",
-      "ctrl-p": "search::SelectPrevMatch",
+      "ctrl-p": "search::SelectPreviousMatch",
       "ctrl-x": "tab_switcher::CloseSelectedItem"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-p": "menu::SelectPrevious"
+    }
+  },
+  {
+    "context": "(((vim_mode == insert || vim_mode == normal) && showing_signature_help) && !showing_completions)",
+    "bindings": {
+      "ctrl-p": null
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "k": [
+        "vim::Up",
+        {
+          "display_lines": true
+        }
+      ]
+    }
+  },
+  {
+    "context": "(VimControl && !menu)",
+    "bindings": {
+      "j": [
+        "vim::Down",
+        {
+          "display_lines": true
+        }
+      ]
     }
   }
 ]
